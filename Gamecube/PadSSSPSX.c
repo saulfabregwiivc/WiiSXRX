@@ -278,9 +278,6 @@ unsigned char sendMultitapData(const int pad, const unsigned char value, u8 *buf
 	else{
 		return sendJoystickData(pad, value, buf);
 	}
-	global.cmdLen = 34;
-    memcpy(buf, multitappar+1, 34);
-	return multitappar[0];
 }
 
 static const u8 cmd40[8] =
