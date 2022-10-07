@@ -57,12 +57,14 @@ char *Mcd2Data = (char*)MCD2_LO;
 char Mcd1Data[MCD_SIZE], Mcd2Data[MCD_SIZE];
 #endif
 
+#define SIO_CYCLES		535
+
 // clk cycle byte
 // 4us * 8bits = ((PSXCLK / 1000000) * 32) / BIAS; (linuzappz)
 #define SIO_INT() { \
 	if (!Config.Sio) { \
 		psxRegs.interrupt|= 0x80; \
-		psxRegs.intCycle[7+1] = 200; /*270;*/ \
+		psxRegs.intCycle[7+1] = SIO_CYCLES; /*270;*/ \
 		psxRegs.intCycle[7] = psxRegs.cycle; \
 	} \
 }
