@@ -258,7 +258,7 @@ struct ButtonInfo
 	{	NULL,	BTN_A_SEL,	FRAME_STRINGS[14],	440.0,	170.0,	 70.0,	56.0,	 6,	12,	 8,	10,	Func_BiosSelectUSB,		Func_ReturnFromSettingsFrame }, // Bios: USB
 	{	NULL,	BTN_A_SEL,	FRAME_STRINGS[15],	520.0,	170.0,	 70.0,	56.0,	 6,	12,	 9,	 7,	Func_BiosSelectDVD,		Func_ReturnFromSettingsFrame }, // Bios: DVD
 	{	NULL,	BTN_A_SEL,	FRAME_STRINGS[16],	295.0,	240.0,	 75.0,	56.0,	 7,	13,	12,	12,	Func_BootBiosYes,		Func_ReturnFromSettingsFrame }, // Boot thru BIOS: Yes
-	{	NULL,	BTN_A_SEL,	FRAME_STRINGS[17],	380.0,	240.0,	 75.0,	56.0,	 8,	13,	11,	11,	Func_BootBiosNo,		Func_ReturnFromSettingsFrame }, // Boot thru BIOS: No
+	{	NULL,	BTN_A_SEL,	FRAME_STRINGS[17],	380.0,	240.0,	 75.0,	56.0,	 8,	13,	12,	12,	Func_BootBiosNo,		Func_ReturnFromSettingsFrame }, // Boot thru BIOS: No
 	{	NULL,	BTN_A_NRM,	FRAME_STRINGS[8],	295.0,	310.0,	200.0,	56.0,	11,	14,	-1,	-1,	Func_ExecuteBios,		Func_ReturnFromSettingsFrame }, // Execute BIOS
 	{	NULL,	BTN_A_NRM,	FRAME_STRINGS[13],	295.0,	380.0,	 55.0,	56.0,	13,	 0,	15,	15,	Func_SaveSettingsSD,	Func_ReturnFromSettingsFrame }, // Save settings: SD
 	{	NULL,	BTN_A_NRM,	FRAME_STRINGS[14],	360.0,	380.0,	 70.0,	56.0,	13,	 0,	14,	14,	Func_SaveSettingsUSB,	Func_ReturnFromSettingsFrame }, // Save settings: USB
