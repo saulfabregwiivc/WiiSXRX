@@ -47,7 +47,6 @@
 #include "fps.h"
 #include "gpu.h"
 
-#include <stdbool.h>
 #include "../Gamecube/DEBUG.h"
 
 ////////////////////////////////////////////////////////////////////////

@@ -61,8 +61,8 @@ void Func_PlayGame();
 #define FRAME_STRINGS mainFrameStrings
 
 char FRAME_STRINGS[7][20] =
-	{ "Load CD",
-	  "Current CD",
+	{ "Load ISO",
+	  "Current ISO",
 	  "Settings",
 	  "Credits",
 	  "Quit",
@@ -147,7 +147,7 @@ void Func_CurrentROM()
 {
 	if(!hasLoadedISO)
 	{
-		menu::MessageBox::getInstance().setMessage("Please load a CD first");
+		menu::MessageBox::getInstance().setMessage("Please load an ISO first");
 		return;
 	}
 
@@ -164,9 +164,9 @@ void Func_Credits()
 {
 	char CreditsInfo[512] = "";
 #ifdef HW_RVL
-	sprintf(CreditsInfo,"WiiSX RX Beta 2.7\n");
+	sprintf(CreditsInfo,"WiiSX RX Beta 2.5\n");
 #else
-	sprintf(CreditsInfo,"CubeSX RX Beta 2.7\n");
+	sprintf(CreditsInfo,"CubeSX RX Beta 2.5\n");
 #endif
 	strcat(CreditsInfo,"www.github.com/niuus/WiiSXRX\n");
 	strcat(CreditsInfo,"WiiSX RX & logo: NiuuS\n");
@@ -237,7 +237,7 @@ void Func_PlayGame()
 {
 	if(!hasLoadedISO)
 	{
-		menu::MessageBox::getInstance().setMessage("Please load a CD first");
+		menu::MessageBox::getInstance().setMessage("Please load an ISO first");
 		return;
 	}
 	

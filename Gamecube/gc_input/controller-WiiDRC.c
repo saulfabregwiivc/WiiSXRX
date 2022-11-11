@@ -84,10 +84,9 @@ static button_t analog_sources[] = {
 };
 
 static button_t menu_combos[] = {
-		{ 0, WIIDRC_BUTTON_PLUS|WIIDRC_BUTTON_B, "Plus+B" },
-		{ 1, WIIDRC_BUTTON_PLUS|WIIDRC_BUTTON_MINUS, "Plus+Minus" },
+		{ 0, WIIDRC_BUTTON_X | WIIDRC_BUTTON_Y, "X+Y" },
+		{ 1, WIIDRC_BUTTON_ZL | WIIDRC_BUTTON_ZR, "ZL+ZR" },
 		{ 2, WIIDRC_BUTTON_HOME, "Home" },
-		{ 3, WIIDRC_BUTTON_ZL|WIIDRC_BUTTON_ZR, "ZL+ZR" },
 };
 
 static void pause(int Control){ }

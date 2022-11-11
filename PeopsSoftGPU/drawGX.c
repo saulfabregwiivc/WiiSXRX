@@ -1,7 +1,7 @@
 /***************************************************************************
     drawGX.m
     PeopsSoftGPU for cubeSX/wiiSX
-
+  
     Created by sepp256 on Thur Jun 26 2008.
     Copyright (c) 2008 Gil Pedersen.
     Adapted from draw.c by Pete Bernet and drawgl.m by Gil Pedersen.
@@ -20,8 +20,6 @@
 #include <gccore.h>
 #include <malloc.h>
 #include <time.h>
-#include <ogc/lwp_watchdog.h>
-#include "../coredebug.h"
 #include "stdafx.h"
 #define _IN_DRAW
 #include "externals.h"
@@ -96,13 +94,13 @@ void DoBufferSwap(void)                                // SWAP BUFFERS
 
  // TODO: visual rumble
 
-/*
-  if(iRumbleTime)
+/*     
+  if(iRumbleTime) 
    {
-    ScreenRect.left+=((rand()*iRumbleVal)/RAND_MAX)-(iRumbleVal/2);
-    ScreenRect.right+=((rand()*iRumbleVal)/RAND_MAX)-(iRumbleVal/2);
-    ScreenRect.top+=((rand()*iRumbleVal)/RAND_MAX)-(iRumbleVal/2);
-    ScreenRect.bottom+=((rand()*iRumbleVal)/RAND_MAX)-(iRumbleVal/2);
+    ScreenRect.left+=((rand()*iRumbleVal)/RAND_MAX)-(iRumbleVal/2); 
+    ScreenRect.right+=((rand()*iRumbleVal)/RAND_MAX)-(iRumbleVal/2); 
+    ScreenRect.top+=((rand()*iRumbleVal)/RAND_MAX)-(iRumbleVal/2); 
+    ScreenRect.bottom+=((rand()*iRumbleVal)/RAND_MAX)-(iRumbleVal/2); 
     iRumbleTime--;
    }
 */
@@ -168,19 +166,15 @@ void DoClearFrontBuffer(void)                          // CLEAR DX BUFFER
 //	printf("DoClearFrontBuffer\n");
 
 	//Write menu/debug text on screen
-	if(showFPSonScreen && (ulKeybits&KEY_SHOWFPS))
-	{
-	    GXColor fontColor = {150,255,150,255};
-        IplFont_drawInit(fontColor);
+	GXColor fontColor = {150,255,150,255};
+	IplFont_drawInit(fontColor);
+	if((ulKeybits&KEY_SHOWFPS)&&showFPSonScreen)
 		IplFont_drawString(10,35,szDispBuf, 1.0, false);
-		int i = 0;
-        DEBUG_update();
-        for (i=0;i<DEBUG_TEXT_HEIGHT;i++)
-		{
-            IplFont_drawString(10,(16*i+60),text[i], 0.5, false);
-		}
-	}
 
+	int i = 0;
+	DEBUG_update();
+	for (i=0;i<DEBUG_TEXT_HEIGHT;i++)
+		IplFont_drawString(10,(10*i+60),text[i], 0.5, false);
 
    //reset swap table from GUI/DEBUG
 	GX_SetTevSwapModeTable(GX_TEV_SWAP0, GX_CH_RED, GX_CH_GREEN, GX_CH_BLUE, GX_CH_ALPHA);
@@ -189,9 +183,9 @@ void DoClearFrontBuffer(void)                          // CLEAR DX BUFFER
 	GX_DrawDone();
 
 	whichfb ^= 1;
-	GX_CopyDisp(xfb[whichfb], GX_TRUE);
+	GX_CopyDisp(xfb[0], GX_TRUE);
 	GX_DrawDone();
-	VIDEO_SetNextFramebuffer(xfb[whichfb]);
+	VIDEO_SetNextFramebuffer(xfb[0]);
 	VIDEO_Flush();
 //	VIDEO_WaitVSync();
 }
@@ -358,8 +352,7 @@ void GX_Flip(short width, short height, u8 * buffer, int pitch)
 		oldwidth = width;
 		oldheight = height;
 		memset(GXtexture,0,iResX_Max*iResY_Max*2);
-		GX_InitTexObj(&GXtexobj, GXtexture, width, height, GX_TF_RGB565, GX_CLAMP, GX_CLAMP, GX_TRUE);
-		GX_InitTexObjFilterMode(&GXtexobj, GX_LINEAR, GX_LINEAR);  // GX_LINEAR 1X filter
+		GX_InitTexObj(&GXtexobj, GXtexture, width, height, GX_TF_RGB565, GX_CLAMP, GX_CLAMP, GX_FALSE);
 	}
 /*
 	for (h = 0; h < height; h += 4)
@@ -458,19 +451,16 @@ void GX_Flip(short width, short height, u8 * buffer, int pitch)
 	GX_End();
 
 	//Write menu/debug text on screen
-	if (showFPSonScreen && (ulKeybits&KEY_SHOWFPS))
-    {
-        GXColor fontColor = {150,255,150,255};
-	    IplFont_drawInit(fontColor);
+	GXColor fontColor = {150,255,150,255};
+	IplFont_drawInit(fontColor);
+	if((ulKeybits&KEY_SHOWFPS)&&showFPSonScreen)
 		IplFont_drawString(10,35,szDispBuf, 1.0, false);
-		int i = 0;
-        DEBUG_update();
-        for (i=0;i<DEBUG_TEXT_HEIGHT;i++)
-		{
-            IplFont_drawString(10,(10*i+60),text[i], 0.5, false);
-		}
-    }
 
+	int i = 0;
+	DEBUG_update();
+	for (i=0;i<DEBUG_TEXT_HEIGHT;i++)
+		IplFont_drawString(10,(10*i+60),text[i], 0.5, false);
+		
    //reset swap table from GUI/DEBUG
 	GX_SetTevSwapModeTable(GX_TEV_SWAP0, GX_CH_RED, GX_CH_GREEN, GX_CH_BLUE, GX_CH_ALPHA);
 	GX_SetTevSwapMode(GX_TEVSTAGE0, GX_TEV_SWAP0, GX_TEV_SWAP0);
@@ -478,10 +468,10 @@ void GX_Flip(short width, short height, u8 * buffer, int pitch)
 	GX_DrawDone();
 
 	whichfb ^= 1;
-	GX_CopyDisp(xfb[whichfb], GX_TRUE);
+	GX_CopyDisp(xfb[0], GX_TRUE);
 	GX_DrawDone();
 //	printf("Prv.Rng.x0,x1,y0 = %d, %d, %d, Prv.Mode.y = %d,DispPos.x,y = %d, %d, RGB24 = %x\n",PreviousPSXDisplay.Range.x0,PreviousPSXDisplay.Range.x1,PreviousPSXDisplay.Range.y0,PreviousPSXDisplay.DisplayMode.y,PSXDisplay.DisplayPosition.x,PSXDisplay.DisplayPosition.y,PSXDisplay.RGB24);
-	VIDEO_SetNextFramebuffer(xfb[whichfb]);
+	VIDEO_SetNextFramebuffer(xfb[0]);
 	VIDEO_Flush();
 //	VIDEO_WaitVSync();
 }
